@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 
 import { TipCalculator } from './components/TipCalculator';
 import { store } from './store';
-import './App.css';
+import './index.css';
 
 function App() {
   return (

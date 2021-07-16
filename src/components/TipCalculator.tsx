@@ -1,53 +1,20 @@
 import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { ActionTypes } from '../store/actions';
-import { selectBill, selectPercentage, selectPerPerson, selectSplit, selectTotal, selectTip } from '../store/selectors';
+import { TipInput } from './TipInput';
+import { TipResult } from './TipResult';
 
 export const TipCalculator = () => {
-  const bill = useSelector(selectBill);
-  const percentage = useSelector(selectPercentage);
-  const split = useSelector(selectSplit);
-  const total = useSelector(selectTotal);
-  const perPerson = useSelector(selectPerPerson);
-  const tip = useSelector(selectTip);
-
   const dispatch = useDispatch();
 
   return (
-    <div>
-      <div>
-        <span>Bill: </span>
-        <input value={bill} onChange={e => dispatch({
-          type: ActionTypes.BillChange,
-          payload: e.target.value
-        })} />
-      </div>
-
-      <div>
-        <span>Tip %: </span>
-        <input value={percentage} onChange={e => dispatch({
-          type: ActionTypes.PercentageChange,
-          payload: e.target.value
-        })} />
-      </div>
-
-      <div>
-        <span>Split</span>
-        <button onClick={() => dispatch({
-          type: ActionTypes.SplitIncrement})}>+</button>
-        <span>{split}</span>
-        <button onClick={() => dispatch({
-          type: ActionTypes.SplitDecrement})}>-</button>
-      </div>
-
-      <button onClick={() => dispatch({
+    <div className='TipCalculator p-2 mt-0 md:mt-8 lg:mt16 w-full md:w-4/5
+    lg:w-1/2 m-auto'>
+      <TipInput />
+      <button className='text-center text-3xl border rounded-lg bg-gray-700
+      w-full text-white uppercase shadow-lg' onClick={() => dispatch({
         type: ActionTypes.Reset})}>RESET</button>
-
-      <div>
-        <div>Bill Total: {total}</div>
-        <div>Tip: {tip}</div>
-        <div>Per Person: {perPerson}</div>
-      </div>
+      <TipResult />
     </div>
   )
 };
